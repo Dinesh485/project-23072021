@@ -21,7 +21,39 @@ figure.zoom img {
   display: block;
   width: 100%;
 }
+input[type=range]::-webkit-slider-thumb {
 
+
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: rgb(0, 162, 255);
+  cursor: pointer;
+  -webkit-appearance: none;
+  box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.5);
+}
+input[type=range]::-moz-slider-thumb {
+
+
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: rgb(0, 162, 255);
+  cursor: pointer;
+  -webkit-appearance: none;
+  box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.5);
+}
+input[type=range]::-ms-thumb {
+
+
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background: rgb(0, 162, 255);
+  cursor: pointer;
+  -webkit-appearance: none;
+  box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.5);
+}
  
  
     </style>
@@ -54,11 +86,47 @@ figure.zoom img {
                  <div class=" mt-10 ">
                      <div class="w-10/12 bg-gray-100 p-1 px-3 rounded-t-md">Lorem ipsum dolor <u>sit amet</u>.</div>
                      <div class="muliti-step p-5 bg-gray-100 rounded-md rounded-tl-none">
-                         <div class="tab-container relative min-h-[300px]">
-                        <form class="tab">
+                         <form class="tab-container relative min-h-[300px]">
+                              <!-- size tab -->
+                         <div class="tab  w-full min-h-64  ">
+                            <h1 class = 'font-medium text-center text-xl mb-10'>what is your size</h1>
+                             <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border">
+                                 <div class="input-field w-full">
+                                     <input class = 'hidden peer' type="radio" name="size-standards" id="ES" checked>
+                                     <label for="ES" class = "  py-2 block text-xl text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                         ES
+                                     </label>
+                                 </div>
+                                 <div class="input-field w-full">
+                                     <input class = 'hidden peer' type="radio" name="size-standards" id="EU">
+                                     <label for="EU" class = " py-2 block text-xl text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                         EU
+                                     </label>
+                                 </div>
+                             </div>
+                             <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border">
+                                 <div class="input-field w-full">
+                                     <input class = 'hidden peer' type="radio" name="gender" id="general" checked>
+                                     <label for="general" class = "uppercase   py-2 block text-lg text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                         general
+                                     </label>
+                                 </div>
+                                 <div class="input-field w-full">
+                                     <input class = 'hidden peer' type="radio" name="gender" id="women">
+                                     <label for="women" class = "uppercase  py-2 block text-lg text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                         women
+                                     </label>
+                                 </div>
+                             </div>
+                             <div id = 'foot-size-indicator' class="text-center text-xl mb-5 mt-10">0</div>
+                             <input class = "appearance-none bg-gray-400 h-[2px] w-full sm:w-10/12 mx-auto block mt-10 " type="range" name="foot-size" id="foot-size" min = "0" max = '100' step = '10'>
+                             <img src="https://i1.adis.ws/i/bauer/grid-floor" alt="">
+                        </div>
+                             <!-- fit tab -->
+                        <div class="tab hidden min-h-64 ">
                         <h1 class = 'text-center font-medium text-xl mb-5'>Lorem, ipsum.</h1>
                         <div class="input-field mb-5 min-w-[200px]">
-                            <input class = 'peer hidden' type="radio" name="fit" id="pro-fit">
+                            <input class = 'peer hidden' checked type="radio" name="fit" id="pro-fit">
                              <label for="pro-fit" class = 'bg-gray-200 peer-checked:bg-blue-500 peer-checked:text-white  px-5 py-3 rounded-full relative flex justify-center  items-center'>
                                 
                                  <svg  class = ' absolute left-4 w-8 fill-current' viewBox="0 0 54 48"  xmlns="http://www.w3.org/2000/svg">
@@ -277,10 +345,8 @@ figure.zoom img {
                              </label>
                              <p class = 'text-sm ml-4'>Lorem ipsum dolor, sit amet consectetur </p>
                         </div>
-                         </form>
-                         <div class="tab hidden w-full h-64 grid place-content-center text-xl ">
-                             <h1>tab 2</h1>
                          </div>
+                        
                          <div class="tab hidden w-full h-64 grid place-content-center text-xl ">
                              <h1>tab 3</h1>
                          </div>
@@ -296,7 +362,7 @@ figure.zoom img {
                          <div class="tab hidden w-full h-64 grid place-content-center text-xl ">
                              <h1>tab 7</h1>
                          </div>
-                        </div>
+                        </form>
                         <div class="grid grid-cols-3 items-center justify-items-center mt-7 text-lg">
                             <a id = 'prev' href = '#' class="text-blue-500 flex w-[fit-content]  items-center "> <svg  class = "w-4 fill-current"xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg><span  >previous</span> </a>
                             <div class="tab-count text-sm"><span>1</span>/ <span>2</span></div>
@@ -428,7 +494,16 @@ figure.zoom img {
   zoomer.style.backgroundPosition = x + '% ' + y + '%';
 }
     
+      //handling form values
+      const form = document.querySelector('form')
+      const footSizeIndcator = document.querySelector('#foot-size-indicator')
+      const footSize = form.elements['foot-size']
+      footSizeIndcator.innerText = footSize.value
       
+      footSize.addEventListener('input', () =>{
+        footSizeIndcator.innerText = footSize.value
+      })
+       
 
     </script>
 </body>
