@@ -85,42 +85,81 @@ input[type=range]::-ms-thumb {
                 </div>
                  <div class=" mt-10 ">
                      <div class="w-10/12 bg-gray-100 p-1 px-3 rounded-t-md">Lorem ipsum dolor <u>sit amet</u>.</div>
-                     <div class="muliti-step p-5 bg-gray-100 rounded-md rounded-tl-none">
+                     <div class="muliti-step p-2 sm:p-5 pt-10 bg-gray-100 rounded-md rounded-tl-none">
                          <form class="tab-container relative min-h-[300px]">
+                              <!-- foot width -->
+                         <div class="tab  w-full min-h-64 ">
+                            <h1 class = 'font-medium text-center text-xl mb-10'>How would you describe your foot width?</h1>
+                            <div class="grid grid-cols-3 gap-1 relative pb-10  mx-auto">
+                                <div class="relative  w-9/12 mx-auto max-w-[150px]">
+                                    <img class ="" src="/images/foot-width-narrow-inactive.png" alt="">
+                                    <img class ="foot-image-active transition-opacity duration-200 absolute top-0 left-0" src="/images/foot-width-narrow-active.png" alt="">
+                                </div>
+                                <div class="relative  w-9/12 mx-auto max-w-[150px]">
+                                    <img class ="" src="/images/foot-width-medium-inactive.png" alt="">
+                                    <img class ="foot-image-active transition-opacity duration-200 absolute top-0 left-0 opacity-0" src="/images/foot-width-medium-active.png" alt="">
+                                </div>
+                                <div class="relative  w-9/12 mx-auto max-w-[150px]">
+                                    <img class ="" src="/images/foot-width-wide-inactive.png" alt="">
+                                    <img class ="foot-image-active transition-opacity duration-200 absolute top-0 left-0 opacity-0" src="/images/foot-width-wide-active.png" alt="">
+                                </div>
+                                <img class = "absolute bottom-0" src="/images/grid-floor.png" alt="">
+                            </div>
+                            <div class="mb-10 grid grid-cols-3 gap-4   mx-auto  p-1 text-sm text-center sm:text-base md:gap-2">
+                                <div class="input-field w-full">
+                                    <input class = 'hidden peer' type="radio" name="foot-width" id="narrow-feet" value = 'narrow' checked>
+                                    <label for="narrow-feet" class = "capitalize    py-1 md:py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white border border-gray-300">
+                                        narrow
+                                    </label>
+                                </div>
+                                <div class="input-field w-full">
+                                    <input class = 'hidden peer' type="radio" name="foot-width" value = 'medium' id="medium-feet">
+                                    <label for="medium-feet" class = "capitalize  py-1 md:py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white border border-gray-300">
+                                        medium
+                                    </label>
+                                </div>
+                                <div class="input-field w-full">
+                                    <input class = 'hidden peer' type="radio" name="foot-width" value = 'wide' id="wide-feet">
+                                    <label for="wide-feet" class = "capitalize   py-1 md:py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white border border-gray-300">
+                                        wide
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                               <!-- size tab -->
-                         <div class="tab  w-full min-h-64  ">
+                         <div class="tab hidden  min-h-64  ">
                             <h1 class = 'font-medium text-center text-xl mb-10'>what is your size</h1>
-                             <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border">
+                             <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border text-base text-center sm:text-lg">
                                  <div class="input-field w-full">
                                      <input class = 'hidden peer' type="radio" name="size-standards" id="ES" checked>
-                                     <label for="ES" class = "  py-2 block text-lg text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                     <label for="ES" class = "  py-2 block   rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
                                          ES
                                      </label>
                                  </div>
                                  <div class="input-field w-full">
                                      <input class = 'hidden peer' type="radio" name="size-standards" id="EU">
-                                     <label for="EU" class = " py-2 block text-lg text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                     <label for="EU" class = " py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
                                          EU
                                      </label>
                                  </div>
                              </div>
-                             <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border">
+                             <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border text-base text-center sm:text-lg">
                                  <div class="input-field w-full">
                                      <input class = 'hidden peer' type="radio" name="gender" id="general" checked>
-                                     <label for="general" class = "uppercase   py-2 block text-lg text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                     <label for="general" class = "uppercase   py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
                                          general
                                      </label>
                                  </div>
                                  <div class="input-field w-full">
                                      <input class = 'hidden peer' type="radio" name="gender" id="women">
-                                     <label for="women" class = "uppercase  py-2 block text-lg text-center rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
+                                     <label for="women" class = "uppercase  py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
                                          women
                                      </label>
                                  </div>
                              </div>
                              <div id = 'foot-size-indicator' class="text-center text-xl mb-5 mt-10">0</div>
                              <input class = "appearance-none bg-gray-400 h-[2px] w-full sm:w-10/12 mx-auto block mt-10 " type="range" name="foot-size" id="foot-size" min = "0" max = '100' step = '10'>
-                             <img src="https://i1.adis.ws/i/bauer/grid-floor" alt="">
+                             <img src="/images/grid-floor.png" alt="">
                         </div>
                              <!-- fit tab -->
                         <div class="tab hidden min-h-64 ">
@@ -348,9 +387,6 @@ input[type=range]::-ms-thumb {
                          </div>
                         
                          <div class="tab hidden w-full h-64 grid place-content-center text-xl ">
-                             <h1>tab 3</h1>
-                         </div>
-                         <div class="tab hidden w-full h-64 grid place-content-center text-xl ">
                              <h1>tab 4</h1>
                          </div>
                          <div class="tab hidden w-full h-64 grid place-content-center text-xl ">
@@ -363,7 +399,7 @@ input[type=range]::-ms-thumb {
                              <h1>tab 7</h1>
                          </div>
                         </form>
-                        <div class="grid grid-cols-3 items-center justify-items-center mt-7 text-lg">
+                        <div class="grid grid-cols-3 items-center justify-items-center mt-7 text-base">
                             <a id = 'prev' href = '#' class="text-blue-500 flex w-[fit-content]  items-center "> <svg  class = "w-4 fill-current"xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg><span  >previous</span> </a>
                             <div class="tab-count text-sm"><span>1</span>/ <span>2</span></div>
                             <a id = 'next' href = '#' class="text-blue-500 flex w-[fit-content]  items-center "> <span>next</span> <svg  class = "w-4 fill-current"xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg></a>
@@ -502,6 +538,19 @@ input[type=range]::-ms-thumb {
       
       footSize.addEventListener('input', () =>{
         footSizeIndcator.innerText = footSize.value
+      })
+
+      const footWidth = form.elements['foot-width']
+      footWidth.forEach(item =>{
+          item.addEventListener('input', function(e){
+              let allFootImages = document.querySelectorAll('.foot-image-active')
+               for(let i =0 ; i<allFootImages.length; i ++){
+                   allFootImages[i].classList.add('opacity-0')
+               }
+              let footImage = document.querySelector(`img[src = "/images/foot-width-${e.target.value}-active.png"]`)
+              footImage.classList.remove('opacity-0')
+
+          })
       })
        
 
