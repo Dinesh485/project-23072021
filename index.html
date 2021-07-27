@@ -92,19 +92,19 @@ input[type=range]::-ms-thumb {
                             <h1 class = 'font-medium text-center text-xl mb-10'>what is your size</h1>
                              <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border text-base text-center sm:text-lg">
                                  <div class="input-field w-full">
-                                     <input class = 'hidden peer' type="radio" name="size-standards" id="ES" checked>
+                                     <input class = 'hidden peer' type="radio" name="size-standard" id="ES" value = 'ES' checked>
                                      <label for="ES" class = "  py-2 block   rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
                                          ES
                                      </label>
                                  </div>
                                  <div class="input-field w-full">
-                                     <input class = 'hidden peer' type="radio" name="size-standards" id="EU">
+                                     <input class = 'hidden peer' type="radio" name="size-standard" id="EU" value = 'EU'>
                                      <label for="EU" class = " py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
                                          EU
                                      </label>
                                  </div>
                              </div>
-                             <div class="mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border text-base text-center sm:text-lg">
+                             <div class="hidden mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border text-base text-center sm:text-lg">
                                  <div class="input-field w-full">
                                      <input class = 'hidden peer' type="radio" name="gender" id="general" checked>
                                      <label for="general" class = "uppercase   py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
@@ -118,9 +118,9 @@ input[type=range]::-ms-thumb {
                                      </label>
                                  </div>
                              </div>
-                             <div id = 'foot-size-indicator' class="text-center text-xl mb-5 mt-10">0</div>
-                             <input class = "appearance-none bg-gray-400 h-[2px] w-full sm:w-10/12 mx-auto block mt-10 " type="range" name="foot-size" id="foot-size" min = "0" max = '100' step = '10'>
-                             <img src="/images/grid-floor.png" alt="">
+                             <input type  = 'text' id = 'foot-size' name = 'foot-size' class="text-center text-xl mb-5 mt-10 bg-transparent w-full">
+                             <input class = "appearance-none  bg-gray-400 h-[2px] w-full sm:w-10/12 mx-auto block mt-10 " type="range" id="foot-size-slider" name = 'foot-size-slider' min = "0" step = '1'>
+                             <img src="/images/grid-floor.png" class = 'pointer-events-none' alt="">
                         </div>
                          <!-- fit tab -->
                          <div class="tab hidden min-h-64 ">
@@ -562,14 +562,43 @@ input[type=range]::-ms-thumb {
     
       //handling form values
       const form = document.querySelector('form')
-      const footSizeIndcator = document.querySelector('#foot-size-indicator')
-      const footSize = form.elements['foot-size']
-      footSizeIndcator.innerText = footSize.value
-      
-      footSize.addEventListener('input', () =>{
-        footSizeIndcator.innerText = footSize.value
-      })
 
+
+      // foot size slider handler
+      const footSize = document.querySelector('#foot-size')
+      const footSizeSlider = form.elements['foot-size-slider']
+      const sizeStandard = form.elements['size-standard']
+      const esValues=  ['7 YTH', '8 YTH', '9 YTH', '10 YTH', '11 YTH', '11.5 YTH', '12 YTH', '13 YTH', '13.5 YTH','1', '1.5', '2', '2.5' , '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5' , '12', '13']
+      const euValues = ['24', '24', '26', '27', '27.5', '28', '28.5', '29', '30', '30.5', '31.5', '32.5', '33', '33.5', '34', '35', '35', '36', '37', '38', '40', '40', '41', '41', '42', '42', '43', '44', '44', '45','45', '46', '47', ]
+      let footSizeValues = esValues
+      footSizeSlider.max = footSizeValues.length  - 1
+      footSizeSlider.value = 0
+      footSize.value =footSizeValues[footSizeSlider.value]
+
+      sizeStandard.forEach(item =>{
+          item.addEventListener('input', function(){
+              if(this.value === 'EU'){
+                 
+                  footSizeValues =euValues
+                  footSizeSlider.max = footSizeValues.length  - 1
+                  footSizeSlider.value = 0
+                  footSize.value =footSizeValues[footSizeSlider.value]
+              }else{
+                footSizeValues = esValues
+                footSizeSlider.max = footSizeValues.length  - 1
+                footSizeSlider.value = 0
+                footSize.value =footSizeValues[footSizeSlider.value]
+              }
+          })
+      })
+    
+     
+      footSizeSlider.addEventListener('input', () =>{
+        footSize.value = footSizeValues[footSizeSlider.value]
+      })
+  
+
+      //foot width handlers
       const footWidth = form.elements['foot-width']
       footWidth.forEach(item =>{
           item.addEventListener('input', function(e){
@@ -582,6 +611,8 @@ input[type=range]::-ms-thumb {
 
           })
       })
+
+      //foot height handlers
       const footHeight = form.elements['foot-height']
       footHeight.forEach(item =>{
           item.addEventListener('input', function(e){
