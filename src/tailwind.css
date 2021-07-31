@@ -2,3 +2,116 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.multi-step{
+    @apply mt-10;
+}
+.multi-step .notes{
+    @apply w-10/12 bg-gray-100 p-1 px-3 rounded-t-md;
+}
+.multi-step .container{
+    @apply p-2  sm:p-5 pt-10 bg-gray-100 rounded-md rounded-tl-none;
+}
+.multi-step .tab-container{
+    @apply relative min-h-[300px];
+}
+
+.multi-step .tab h1{
+    @apply font-medium text-center text-xl mb-10;
+}
+
+.multi-step .size-tab > div{
+   @apply mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border text-base text-center sm:text-lg;
+}
+.multi-step .size-tab > div .input-field{
+   @apply w-full;
+}
+.multi-step .size-tab > div .input-field input{
+   @apply hidden;
+}
+.multi-step .size-tab > div .input-field label{
+   @apply py-2 block   rounded-full ;
+}
+.multi-step .size-tab > input[type="text"]{
+   @apply text-center text-xl mb-5 mt-10 bg-transparent w-full;
+}
+.multi-step .size-tab > input[type="range"]{
+   @apply appearance-none  bg-gray-400 h-[2px] w-full sm:w-10/12 mx-auto block mt-10;
+}
+.multi-step .size-tab >img{
+   @apply pointer-events-none;
+}
+
+.multi-step .fit-tab .input-field{
+    @apply mb-7 min-w-[200px];
+}
+.multi-step .fit-tab .input-field input{
+    @apply hidden;
+ }
+ .multi-step .fit-tab .input-field label{
+    @apply px-5 py-3 rounded-full relative flex justify-center  items-center ;
+}
+ .multi-step .fit-tab .input-field p{
+    @apply text-sm ml-4 ;
+}
+
+.multi-step .fit-tab .input-field label div{
+    @apply  text-base md:text-lg uppercase;
+}
+.multi-step .fit-tab .input-field label svg{
+    @apply  absolute left-4 fill-current;
+}
+
+.multi-step .foot-width-tab .images{
+    @apply grid grid-cols-3 gap-1 relative pb-10  mx-auto;
+}
+
+.multi-step .foot-width-tab .images >div{
+    @apply relative  w-9/12 mx-auto max-w-[150px];
+}
+.multi-step .foot-width-tab .images >div .foot-width-image-active{
+    @apply transition-opacity duration-200 absolute top-0 left-0;
+}
+.multi-step .foot-width-tab .images >img{
+    @apply absolute bottom-0;
+}
+.multi-step .foot-width-tab .buttons{
+    @apply mb-10 grid grid-cols-3 gap-4   mx-auto  p-1 text-sm text-center sm:text-base md:gap-2;
+}
+.multi-step .foot-width-tab .buttons .input-field{
+    @apply w-full;
+}
+.multi-step .foot-width-tab .buttons .input-field label{
+    @apply capitalize  py-1 md:py-2 block  rounded-full border border-gray-300;
+}
+.multi-step .foot-height-tab > div{
+    @apply relative mb-7 text-center;
+}
+.multi-step .foot-height-tab > div .inactive-image{
+    @apply absolute top-0 left-0;
+}
+.multi-step .foot-height-tab > div .foot-height-image-active{
+    @apply transition-opacity duration-200 absolute top-0 left-0 ;
+}
+.multi-step .foot-height-tab > div .input-field{
+    @apply  w-[fit-content] absolute right-5 top-1/2 -translate-y-1/2 ;
+}
+.multi-step .foot-height-tab > div .input-field input{
+    @apply hidden;
+}
+.multi-step .foot-height-tab > div .input-field label{
+    @apply capitalize  w-[100px]  py-1 md:py-2 block  rounded-full border border-gray-300;
+}
+
+.multi-step .navigation{
+    @apply  grid grid-cols-3 items-center justify-items-center mt-7 text-base;
+}
+.multi-step .navigation a{
+    @apply  text-blue-500 flex w-[fit-content]  items-center;
+}
+.multi-step .navigation >div{
+    @apply  text-sm;
+}
+.multi-step .navigation a svg{
+    @apply  w-4 fill-current;
+}
