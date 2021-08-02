@@ -64,10 +64,11 @@ input[type=range]::-ms-thumb {
 
     
      <!-- multi step -->
-     <div class="multi-step " style = 'max-width: 350px;'>
-        <div class="notes">Lorem ipsum dolor <u>sit amet</u>.</div>
-        <div class="container ">
-            <form class="tab-container ">
+     <div class="multi-step " >
+        <div class="notes accord-btn "><span>Find your recomended fit</span><span class = "after:rotate-90"><span></span></span></div>
+        <div class="accord">
+        <div class="container">
+            <form class="tab-container size-calculator-form">
                 <!-- size tab -->
             <div class="tab size-tab">
                <h1 >what is your size</h1>
@@ -354,13 +355,13 @@ input[type=range]::-ms-thumb {
                    </div>
                    <div class="input-field ">
                        <input class = 'hidden peer' type="radio" name="foot-width" value = 'medium' id="medium-feet">
-                       <label for="medium-feet" class = "peer-checked:bg-blue-400 peer-checked:text-white ">
+                       <label for="medium-feet" class = "bg-white peer-checked:bg-blue-400 peer-checked:text-white ">
                            medium
                        </label>
                    </div>
                    <div class="input-field ">
                        <input class = 'hidden peer' type="radio" name="foot-width" value = 'wide' id="wide-feet">
-                       <label for="wide-feet" class = "peer-checked:bg-blue-400 peer-checked:text-white">
+                       <label for="wide-feet" class = "bg-white peer-checked:bg-blue-400 peer-checked:text-white">
                            wide
                        </label>
                    </div>
@@ -410,14 +411,35 @@ input[type=range]::-ms-thumb {
             
            
            </form>
-           <div class="navigation">
+           <div class="navigation grid">
                <a id = 'prev' href = '#' > <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg><span  >Back</span> </a>
                <div class="tab-count "><span>1</span>/ <span>2</span></div>
                <a id = 'next' href = '#' > <span>Next</span> <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/></svg></a>
            </div>
+           <div class="end-tab hidden">
+              
+              <div class="content">
+                  <p>your recomended fit is</p>
+                  <div>Elite: <span>6.5</span>/ FIT 2<span></span></div>
+                  <div>performance: <span>6.5</span>/ <span>d</span></div>
+              </div>
+              <div class="fit-image">
+                <img class = "" src="/images/image-fit1.png" alt="">
+                <img class = "hidden" src="/images/image-fit2.png" alt="">
+                <img class = "hidden" src="/images/image-fit3.png" alt="">
+              </div>
+                  
+                <div class="buttons">
+                    <a id = 'again' href="#">Find fit again</a>
+                    <a id = 'got-it' href="#">Got it</a>
+              </div>
+              </div>
+             
+         </div>
+        </div>
        </div>
        
-     </div>
+  
    
    
     <script>
@@ -425,6 +447,7 @@ input[type=range]::-ms-thumb {
         const prevBtn = document.querySelector('#prev')
         const tabs = document.querySelectorAll('.tab')
         const tabCount = document.querySelector('.tab-count')
+        
 
         let maxIndex = tabs.length
         tabCount.children[1].innerText = maxIndex
@@ -433,9 +456,16 @@ input[type=range]::-ms-thumb {
         let index= 0;
 
         nextBtn.addEventListener('click', function(e){
+
            e.preventDefault();
+           if(index === maxIndex -2){
+               this.innerText = 'show result'
+           }
            if(index > maxIndex - 2){
-              return null
+              document.querySelector('.tab-container').classList.add('hidden')
+              document.querySelector('.navigation').classList.add('hidden')
+              document.querySelector('.end-tab').classList.remove('hidden')
+              
            }else{
             index++
          
@@ -450,6 +480,7 @@ input[type=range]::-ms-thumb {
 
         prevBtn.addEventListener('click', function(e){
            e.preventDefault();
+          
           if(index <1){
               return null
           }else{
@@ -485,7 +516,7 @@ input[type=range]::-ms-thumb {
 }
     
       //handling form values
-      const form = document.querySelector('form')
+      const form = document.querySelector('.size-calculator-form')
 
 
       // foot size slider handler
@@ -550,7 +581,39 @@ input[type=range]::-ms-thumb {
           })
       })
        
+     const findAgainbtn = document.querySelector('#again')
+     const gotItbtn = document.querySelector('#got-it')
+     const endTab = document.querySelector('.end-tab')
 
+     findAgainbtn.addEventListener("click", function(e){
+          e.preventDefault()
+        document.querySelector('.tab-container').classList.remove('hidden')
+       document.querySelector('.navigation').classList.remove('hidden')
+       endTab.classList.add('hidden')
+             
+     })
+
+     const accordBtn = document.querySelector('.accord-btn')
+     const accord = document.querySelector('.accord')
+     
+     
+     gotItbtn.addEventListener('click', function(e){
+         e.preventDefault()
+         accord.style.maxHeight = null
+     })
+       accordBtn.addEventListener('click', function(e){
+
+           this.querySelector('span:last-child').classList.toggle('after:rotate-90')
+           const accordHeight = accord.scrollHeight
+           
+            if(!accord.offsetHeight ){
+               
+                accord.style.maxHeight = 300 + accordHeight + 'px'
+            }else{
+                accord.style.maxHeight = null
+            }
+            
+       })
     </script>
 </body>
 </html>

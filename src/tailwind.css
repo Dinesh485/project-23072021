@@ -3,14 +3,31 @@
 @tailwind components;
 @tailwind utilities;
 
-.multi-step{
-    @apply mt-10;
+img{
+    @apply block w-full;
 }
-.multi-step .notes{
-    @apply w-10/12 bg-gray-100 p-1 px-3 rounded-t-md;
+*{
+    @apply no-underline relative font-exo box-border;
+}
+a{
+    @apply text-black;
+}
+
+
+.multi-step{
+    @apply mt-10 max-w-[350px] bg-gray-100 ;
+}
+.multi-step .accord-btn{
+    @apply   p-3 flex justify-between items-center;
+}
+.multi-step .accord-btn > span:last-child{
+    @apply  relative  w-[15px] h-full after:absolute after:w-full after:block after:top-1/2 after:transition-transform  after:-translate-y-1/2 after:h-[2px] after:bg-black  ;
+}
+.multi-step .accord-btn span:last-child span{
+    @apply  w-full block my-auto h-[2px] bg-black ;
 }
 .multi-step .container{
-    @apply p-2  sm:p-5 pt-10 bg-gray-100 rounded-md rounded-tl-none;
+    @apply p-2  sm:p-5 pt-10 ;
 }
 .multi-step .tab-container{
     @apply relative min-h-[300px];
@@ -33,13 +50,13 @@
    @apply py-2 block   rounded-full ;
 }
 .multi-step .size-tab > input[type="text"]{
-   @apply text-center text-xl mb-5 mt-10 bg-transparent w-full;
+   @apply text-center text-xl mb-5 mt-10 bg-transparent w-full border-none;
 }
 .multi-step .size-tab > input[type="range"]{
    @apply appearance-none  bg-gray-400 h-[2px] w-full sm:w-10/12 mx-auto block mt-10;
 }
 .multi-step .size-tab >img{
-   @apply pointer-events-none;
+   @apply pointer-events-none block w-full;
 }
 
 .multi-step .fit-tab .input-field{
@@ -82,7 +99,7 @@
     @apply w-full;
 }
 .multi-step .foot-width-tab .buttons .input-field label{
-    @apply capitalize  py-1 md:py-2 block  rounded-full border border-gray-300;
+    @apply capitalize  py-1 md:py-2 block  rounded-full border  border-gray-300;
 }
 .multi-step .foot-height-tab > div{
     @apply relative mb-7 text-center;
@@ -104,7 +121,7 @@
 }
 
 .multi-step .navigation{
-    @apply  grid grid-cols-3 items-center justify-items-center mt-7 text-base;
+    @apply  grid-cols-3 items-center justify-items-center mt-7 text-base;
 }
 .multi-step .navigation a{
     @apply  text-blue-500 flex w-[fit-content]  items-center;
@@ -114,4 +131,40 @@
 }
 .multi-step .navigation a svg{
     @apply  w-4 fill-current;
+}
+.multi-step .end-tab{
+    @apply pt-8 p-2;
+}
+.multi-step .end-tab .content {
+   @apply text-lg text-center mb-10 capitalize;
+}
+.multi-step .end-tab .content div:nth-child(2){
+   @apply my-1;
+}
+.multi-step .end-tab .content p:nth-child(1){
+   @apply my-1;
+}
+
+.multi-step .end-tab .buttons{
+     @apply grid grid-cols-2 text-center mt-5 gap-8;
+}
+
+.multi-step .end-tab .buttons a{
+    @apply py-2 px-5 w-full  rounded-full mx-auto whitespace-nowrap;
+    
+}
+.multi-step .end-tab .buttons a:last-child{
+    @apply bg-blue-400 text-white;
+    
+}
+.multi-step .end-tab .buttons a:first-child{
+    @apply bg-white;
+    
+}
+
+.multi-step .accord {
+    @apply max-h-0 overflow-hidden transition-all;
+}
+.multi-step .accord-btn {
+    @apply cursor-pointer;
 }
