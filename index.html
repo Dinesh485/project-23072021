@@ -65,7 +65,7 @@ input[type=range]::-ms-thumb {
     
      <!-- multi step -->
      <div class="multi-step " >
-        <div class="notes accord-btn "><span>Find your recomended fit</span class = "hidden"><span></span><span class = "after:rotate-90"><span></span></span></div>
+        <div class="notes accord-btn "><span>Find your recomended fit</span ><span></span><span class = "after:rotate-90 minMaxBtn"><span></span></span></div>
         <div class="accord">
         <div class="container">
             <form class="tab-container size-calculator-form">
@@ -95,7 +95,7 @@ input[type=range]::-ms-thumb {
             <div class="tab hidden fit-tab ">
                <h1 >Lorem, ipsum.</h1>
                <div class="input-field">
-                   <input class = 'peer' checked type="radio" name="fit" id="pro-fit" value = '0'>
+                   <input class = 'peer' checked type="radio" name="fit" id="pro-fit" value = '0' checked>
                     <label for="pro-fit" class = 'bg-gray-200 peer-checked:bg-blue-400 peer-checked:text-white  '>
                        
                         <svg  class = '  w-8 ' viewBox="0 0 54 48"  xmlns="http://www.w3.org/2000/svg">
@@ -430,31 +430,44 @@ input[type=range]::-ms-thumb {
    
    
     <script>
+         const esValues=  ['7 YTH', '8 YTH', '9 YTH', '10 YTH', '11 YTH', '11.5 YTH', '12 YTH', '13 YTH', '13.5 YTH','1', '1.5', '2', '2.5' , '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5' , '12', '13']
+        const euValues = ['24', '24', '26', '27', '27.5', '28', '28.5', '29', '30', '30.5', '31.5', '32.5', '33', '33.5', '34', '35', '35', '36', '37', '38', '40', '40', '41', '41', '42', '42', '43', '44', '44', '45','45', '46', '47', ]
          const form = document.querySelector('.size-calculator-form')
          const accordBtn = document.querySelector('.accord-btn')
          const accord = document.querySelector('.accord')
          const endTab = document.querySelector('.end-tab')
+              
+     const findAgainbtn = document.querySelector('#again')
+     const gotItbtn = document.querySelector('#got-it')
 
         const nextBtn = document.querySelector('#next')
         const prevBtn = document.querySelector('#prev')
         const tabs = document.querySelectorAll('.tab')
         const tabCount = document.querySelector('.tab-count')
          // making a api call
-         let data;
+         
+         let data =  {
+           inputLength: esValues[0],
+            width:form.elements['foot-width'].value,
+            height: form.elements['foot-height'].value,
+            fitType: form.elements['fit'].value,
+            
+        };
+       
        form.addEventListener('change', function(){
-        const footSize = this.elements['foot-size'].value
-        const footWidth = this.elements['foot-width'].value
-        const footHeight = this.elements['foot-height'].value
-        const fit = this.elements['fit'].value
-        const standard = this.elements['size-standard'].value
+         
+         
+        
+        this.elements['fit'].value
+      
          data = {
-           inputLength:  footSize,
-            width: footWidth,
-            height: footHeight,
-            fitType: fit,
-            standard
+           inputLength:  this.elements['foot-size'].value,
+            width:this.elements['foot-width'].value,
+            height: this.elements['foot-height'].value,
+            fitType: this.elements['fit'].value,
+            
         }
-        console.log(data)
+        
     })
 
         let maxIndex = tabs.length
@@ -472,18 +485,150 @@ input[type=range]::-ms-thumb {
              
            }
            if(index > maxIndex - 2){
-              
-                //making a request
-                fetch('/wp-json/getsize/v1/calculate', { method: 'POST', headers: {"Content-type": 'application/json'},body: data}).then(res =>{
+
+                 index = 0
+            tabs.forEach(tab =>{
+               tab.classList.add('hidden')
+           })
+            tabs[index].classList.remove('hidden')
+            tabCount.children[0].innerText = index + 1
+	        
+	function get_selected_type(inputFit) {
+		switch (inputFit) {
+		  case 0:
+			// Pro Fit = 0
+			return "Pro";
+			break;
+		  case 1:
+			// Performance = 1
+			return "Performance";
+			break;
+		  case 2:
+			// Growth/Comfort = 2
+			return "Growth/Comfort";
+			break;
+		  default:
+			// Default "Pro"
+			return "Pro";
+		}
+	}
+		
+ function get_recommended_length(inputFit , inputLength) {
+       
+		// Calculate Reccomended Length based on "inputFit" and "inputLength"
+		switch (inputFit) {
+		  case 0:
+			// Subtract 0.5
+			return inputLength - 0.5;
+			break;
+		  case 1:
+			// Do nothing
+			return inputLength;
+			break;
+		  case 2:
+			// Add 0.5
+			return inputLength + 0.5;
+			break;
+		  default:
+			// Do nothing
+			return inputLength;
+		 }
+	}
+	
+ function get_performance_fit(width, height) {
+
+		// Calculate Reccomended Performance fit based on "width" and "Height"
+		switch (width) {
+		  case 0:
+			// Narrow Width
+			return "D";
+			break;
+		  case 1:
+			// Medium Width
+			switch (height) {
+			  case 2:
+				// Hight Height
+				return "EE";
+				break;
+			  default:
+			    return "D";
+			 }
+			break;
+		  case 2:
+			// Wide Width
+			return "EE";
+			break;
+		  default:
+			// Do nothing
+			return "D";
+		 }
+	}
+	
+	
+  function get_elite_fit(width, height) {
+
+		// Calculate Reccomended Performance fit based on "width" and "Height"
+		switch (width) {
+		  case 0:
+			// Narrow Width
+			return "FIT 1";
+			break;
+		  case 1:
+			// Medium Width
+			switch (height) {
+			  case 2:
+				// Hight Height
+				return "FIT 3";
+				break;
+			  default:
+			    return "FIT 2";
+			 }
+			break;
+		  case 2:
+			// Wide Width
+			switch (height) {
+			  case 0:
+				// Low Height
+				return "FIT 2";
+				break;
+			  default:
+			    return "FIT 3";
+			 }
+			break;
+		  default:
+			// Do nothing
+			return "FIT 1";
+		 }
+	}
+    
+
+   const calculator = (data) =>{
+       const inputFit  = parseInt(data.fitType);
+       const inputLength  = parseInt(data.inputLength);
+       const width = parseInt(data.width);
+       const height=parseInt(data.height)
+       return {
+          selectedFit : get_selected_type(inputFit),
+          recommendedLength : get_recommended_length(inputFit, inputLength),
+          performanceFit : get_performance_fit(width, height),
+          eliteFit : get_elite_fit(width, height)
+       }
+   }
+
+       const calculatedData = calculator(data)
+            
+                   endTab.querySelectorAll('.fit-image img').forEach(img =>{
+                       img.classList.add("hidden")
+                   })
+                   endTab.querySelector(`img[src= "/images/image-fit${parseInt(data.width)+ 1}.png"]`).classList.remove('hidden')
                    accordBtn.querySelector('span:first-child').innerText = 'Your recommended fit is'
-                   accordBtn.querySelector('span:nth-child(2)').innerHTML = `<span>${res.recommendedLength}</span><span>${res.eliteFit}</span><span>${res.performanceFit}</span>`
+                   accordBtn.querySelector('span:nth-child(2)').innerHTML = `<span>${calculatedData.recommendedLength}</span><span>${calculatedData.eliteFit}</span><span>${calculatedData.performanceFit}</span>`
                    accordBtn.querySelector('span:nth-child(2)').classList.remove('hidden')
-                   accordBtn.querySelector('span:nth-child(3)').classList.add('hidden')
-                   endTab.querySelector('.content >div:nth-child(2) span:first-child').innerText = `${res.recommendedLength}`
-                   endTab.querySelector('.content >div:nth-child(2) span:last-child').innerText = `${res.eliteFit}`
-                   endTab.querySelector('.content >div:nth-child(3) span:first-child').innerText = `${res.recommendedLength}`
-                   endTab.querySelector('.content >div:nth-child(3) span:last-child').innerText = `${res.performanceFit}`
-                })
+                   accordBtn.querySelector('.minMaxBtn').classList.add('hidden')
+                   endTab.querySelector('.content >div:nth-child(2) span:first-child').innerText = `${calculatedData.recommendedLength}`
+                   endTab.querySelector('.content >div:nth-child(2) span:last-child').innerText = `${calculatedData.eliteFit}`
+                   endTab.querySelector('.content >div:nth-child(3) span:first-child').innerText = `${calculatedData.recommendedLength}`
+                   endTab.querySelector('.content >div:nth-child(3) span:last-child').innerText = `${calculatedData.performanceFit}`
                 document.querySelector('.tab-container').classList.add('hidden')
               document.querySelector('.navigation').classList.add('hidden')
               document.querySelector('.end-tab').classList.remove('hidden')
@@ -512,6 +657,8 @@ input[type=range]::-ms-thumb {
            })
             tabs[index].classList.remove('hidden')
             tabCount.children[0].innerText = index + 1
+            nextBtn.innerHTML = `<span>Next</span> <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/>`
+
           }
         })
 
@@ -543,8 +690,7 @@ input[type=range]::-ms-thumb {
       const footSize = document.querySelector('#foot-size')
       const footSizeSlider = form.elements['foot-size-slider']
       const sizeStandard = form.elements['size-standard']
-      const esValues=  ['7 YTH', '8 YTH', '9 YTH', '10 YTH', '11 YTH', '11.5 YTH', '12 YTH', '13 YTH', '13.5 YTH','1', '1.5', '2', '2.5' , '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5' , '12', '13']
-      const euValues = ['24', '24', '26', '27', '27.5', '28', '28.5', '29', '30', '30.5', '31.5', '32.5', '33', '33.5', '34', '35', '35', '36', '37', '38', '40', '40', '41', '41', '42', '42', '43', '44', '44', '45','45', '46', '47', ]
+     
       let footSizeValues = esValues
       footSizeSlider.max = footSizeValues.length  - 1
       footSizeSlider.value = 0
@@ -601,9 +747,7 @@ input[type=range]::-ms-thumb {
 
           })
       })
-       
-     const findAgainbtn = document.querySelector('#again')
-     const gotItbtn = document.querySelector('#got-it')
+  
    
 
      findAgainbtn.addEventListener("click", function(e){
@@ -611,7 +755,8 @@ input[type=range]::-ms-thumb {
         document.querySelector('.tab-container').classList.remove('hidden')
        document.querySelector('.navigation').classList.remove('hidden')
        endTab.classList.add('hidden')
-             
+       nextBtn.innerHTML = `<span>Next</span> <svg  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z"/>`
+
      })
 
     

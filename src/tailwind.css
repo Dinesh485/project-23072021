@@ -15,7 +15,7 @@ a{
 
 
 .multi-step{
-    @apply mt-10 max-w-[350px] bg-gray-100 ;
+    @apply mt-10 max-w-[400px] bg-gray-100 ;
 }
 .multi-step .accord-btn{
     @apply   p-3 flex justify-between items-center;
@@ -168,8 +168,8 @@ a{
 .multi-step .accord-btn {
     @apply cursor-pointer;
 }
-.multi-step .accord-btn span:nth-child(2) {
-    @apply text-blue-400;
+.multi-step .accord-btn > span:nth-child(2) {
+    @apply text-blue-400 !important;
 }
 .multi-step .accord-btn > span:nth-child(2) > span{
     @apply  px-2;
