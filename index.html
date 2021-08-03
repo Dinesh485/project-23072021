@@ -74,7 +74,7 @@ input[type=range]::-ms-thumb {
                <h1 >what is your size</h1>
                 <div>
                     <div class="input-field ">
-                        <input class = 'peer' type="radio" name="size-standard" id="ES" value = 'ES' checked>
+                        <input class = 'peer' type="radio" name="size-standard" id="ES" value = 'US' checked>
                         <label for="ES" class = " peer-checked:bg-blue-400 peer-checked:text-white">
                             ES
                         </label>
@@ -86,20 +86,7 @@ input[type=range]::-ms-thumb {
                         </label>
                     </div>
                 </div>
-                <!-- <div class="hidden mb-5 grid grid-cols-2 gap-1  md:w-10/12 max-w-md mx-auto bg-white rounded-full p-1 border text-base text-center sm:text-lg">
-                    <div class="input-field w-full">
-                        <input class = 'hidden peer' type="radio" name="gender" id="general" checked>
-                        <label for="general" class = "uppercase   py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
-                            general
-                        </label>
-                    </div>
-                    <div class="input-field w-full">
-                        <input class = 'hidden peer' type="radio" name="gender" id="women">
-                        <label for="women" class = "uppercase  py-2 block  rounded-full peer-checked:bg-blue-400 peer-checked:text-white">
-                            women
-                        </label>
-                    </div>
-                </div> -->
+                
                 <input type  = 'text' id = 'foot-size' name = 'foot-size' >
                 <input  type="range" id="foot-size-slider" name = 'foot-size-slider' min = "0" step = '1'>
                 <img src="/images/grid-floor.png"  alt="">
@@ -108,7 +95,7 @@ input[type=range]::-ms-thumb {
             <div class="tab hidden fit-tab ">
                <h1 >Lorem, ipsum.</h1>
                <div class="input-field">
-                   <input class = 'peer' checked type="radio" name="fit" id="pro-fit">
+                   <input class = 'peer' checked type="radio" name="fit" id="pro-fit" value = '0'>
                     <label for="pro-fit" class = 'bg-gray-200 peer-checked:bg-blue-400 peer-checked:text-white  '>
                        
                         <svg  class = '  w-8 ' viewBox="0 0 54 48"  xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +109,7 @@ input[type=range]::-ms-thumb {
                     <p>Lorem ipsum dolor, sit amet consectetur </p>
                </div>
                <div class="input-field">
-                   <input class = 'peer' type="radio" name="fit" id="performance-fit">
+                   <input class = 'peer' type="radio" name="fit" id="performance-fit" value = '1'>
                     <label for="performance-fit" class = 'bg-gray-200 peer-checked:bg-blue-400 peer-checked:text-white '>
                         <!-- <img class = 'absolute h-2/3 left-4' src="/images/Vector-1.svg" alt=""> -->
                         <svg class = ' w-7 '  viewBox="0 0 44 43"   xmlns="http://www.w3.org/2000/svg">
@@ -224,7 +211,7 @@ input[type=range]::-ms-thumb {
                     <p>Lorem ipsum dolor, sit amet consectetur </p>
                </div>
                <div class="input-field">
-                   <input class = 'peer ' type="radio" name="fit" id="comfort-fit">
+                   <input class = 'peer ' type="radio" name="fit" id="comfort-fit" value = '2'>
                     <label for="comfort-fit" class = 'bg-gray-200 peer-checked:bg-blue-400 peer-checked:text-white '>
                        
                         <svg class = ' w-8'   viewBox="0 0 53 54"  xmlns="http://www.w3.org/2000/svg">
@@ -348,19 +335,19 @@ input[type=range]::-ms-thumb {
                </div>
                <div class="buttons ">
                    <div class="input-field ">
-                       <input class = 'hidden peer' type="radio" name="foot-width" id="narrow-feet" value = 'narrow' checked>
+                       <input class = 'hidden peer' type="radio" name="foot-width" id="narrow-feet" value = '0' data-id = 'narrow' checked>
                        <label for="narrow-feet" class = " peer-checked:bg-blue-400 peer-checked:text-white ">
                            narrow
                        </label>
                    </div>
                    <div class="input-field ">
-                       <input class = 'hidden peer' type="radio" name="foot-width" value = 'medium' id="medium-feet">
+                       <input class = 'hidden peer' type="radio" name="foot-width" value = '1' data-id = 'medium' id="medium-feet">
                        <label for="medium-feet" class = "bg-white peer-checked:bg-blue-400 peer-checked:text-white ">
                            medium
                        </label>
                    </div>
                    <div class="input-field ">
-                       <input class = 'hidden peer' type="radio" name="foot-width" value = 'wide' id="wide-feet">
+                       <input class = 'hidden peer' type="radio" name="foot-width" value = '2' data-id = 'wide' id="wide-feet">
                        <label for="wide-feet" class = "bg-white peer-checked:bg-blue-400 peer-checked:text-white">
                            wide
                        </label>
@@ -375,7 +362,7 @@ input[type=range]::-ms-thumb {
                    <img class = 'inactive-image' src="/images/foot-height-low-inactive.png" alt="">
                    <img class = 'foot-height-image-active ' src="/images/foot-height-low-active.png" alt="">
                    <div class="input-field">
-                       <input class = 'peer' type="radio" name="foot-height" id="low-height-feet" value = 'low' checked>
+                       <input class = 'peer' type="radio" name="foot-height" id="low-height-feet" value = '0' data-id ='low' checked>
                        <label for="low-height-feet" class = " bg-white peer-checked:bg-blue-400 peer-checked:text-white ">
                            low
                        </label>
@@ -386,7 +373,7 @@ input[type=range]::-ms-thumb {
                    <img class = 'inactive-image' src="/images/foot-height-medium-inactive.png" alt="">
                    <img class = 'foot-height-image-active  opacity-0' src="/images/foot-height-medium-active.png" alt="">
                    <div class="input-field ">
-                       <input class = 'peer' type="radio" name="foot-height" id="medium-height-feet" value = 'medium' >
+                       <input class = 'peer' type="radio" name="foot-height" id="medium-height-feet" value = '1' data-id = 'medium'>
                        <label for="medium-height-feet" class = "bg-white peer-checked:bg-blue-400 peer-checked:text-white ">
                            medium
                        </label>
@@ -397,7 +384,7 @@ input[type=range]::-ms-thumb {
                    <img class = 'inactive-image' src="/images/foot-height-high-inactive.png" alt="">
                    <img class = 'foot-height-image-active  opacity-0' src="/images/foot-height-high-active.png" alt="">
                    <div class="input-field">
-                       <input class = 'peer' type="radio" name="foot-height" id="high-height-feet" value = 'high' >
+                       <input class = 'peer' type="radio" name="foot-height" id="high-height-feet" value = '2' data-id = 'high'>
                        <label for="high-height-feet" class = "bg-white peer-checked:bg-blue-400 peer-checked:text-white ">
                            high
                        </label>
@@ -561,7 +548,7 @@ input[type=range]::-ms-thumb {
                for(let i =0 ; i<allFootImages.length; i ++){
                    allFootImages[i].classList.add('opacity-0')
                }
-              let footImage = document.querySelector(`img[src = "/images/foot-width-${e.target.value}-active.png"]`)
+              let footImage = document.querySelector(`img[src = "/images/foot-width-${e.target.getAttribute('data-id')}-active.png"]`)
               footImage.classList.remove('opacity-0')
 
           })
@@ -575,7 +562,8 @@ input[type=range]::-ms-thumb {
                for(let i =0 ; i<allFootImages.length; i ++){
                    allFootImages[i].classList.add('opacity-0')
                }
-              let footImage = document.querySelector(`img[src = "/images/foot-height-${e.target.value}-active.png"]`)
+              
+              let footImage = document.querySelector(`img[src = "/images/foot-height-${e.target.getAttribute('data-id')}-active.png"]`)
               footImage.classList.remove('opacity-0')
 
           })
@@ -614,6 +602,24 @@ input[type=range]::-ms-thumb {
             }
             
        })
+
+    // making a api call
+
+    form.addEventListener('change', function(){
+        const footSize = this.elements['foot-size'].value
+        const footWidth = this.elements['foot-width'].value
+        const footHeight = this.elements['foot-height'].value
+        const fit = this.elements['fit'].value
+        let data = {
+            footSize,
+            footWidth,
+            footHeight,
+            fit,
+        }
+        console.log(data)
+    })
+
+
     </script>
 </body>
 </html>
