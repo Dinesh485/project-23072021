@@ -65,7 +65,7 @@ input[type=range]::-ms-thumb {
     
      <!-- multi step -->
      <div class="multi-step " >
-        <div class="notes accord-btn "><span>Find your recomended fit</span><span class = "after:rotate-90"><span></span></span></div>
+        <div class="notes accord-btn "><span>Find your recomended fit</span class = "hidden"><span></span><span class = "after:rotate-90"><span></span></span></div>
         <div class="accord">
         <div class="container">
             <form class="tab-container size-calculator-form">
@@ -76,7 +76,7 @@ input[type=range]::-ms-thumb {
                     <div class="input-field ">
                         <input class = 'peer' type="radio" name="size-standard" id="ES" value = 'US' checked>
                         <label for="ES" class = " peer-checked:bg-blue-400 peer-checked:text-white">
-                            ES
+                            US
                         </label>
                     </div>
                     <div class="input-field ">
@@ -407,7 +407,7 @@ input[type=range]::-ms-thumb {
               
               <div class="content">
                   <p>your recomended fit is</p>
-                  <div>Elite: <span>6.5</span>/ FIT 2<span></span></div>
+                  <div>Elite: <span>6.5</span>/ <span> FIT 2</span></div>
                   <div>performance: <span>6.5</span>/ <span>d</span></div>
               </div>
               <div class="fit-image">
@@ -430,11 +430,32 @@ input[type=range]::-ms-thumb {
    
    
     <script>
+         const form = document.querySelector('.size-calculator-form')
+         const accordBtn = document.querySelector('.accord-btn')
+         const accord = document.querySelector('.accord')
+         const endTab = document.querySelector('.end-tab')
+
         const nextBtn = document.querySelector('#next')
         const prevBtn = document.querySelector('#prev')
         const tabs = document.querySelectorAll('.tab')
         const tabCount = document.querySelector('.tab-count')
-        
+         // making a api call
+         let data;
+       form.addEventListener('change', function(){
+        const footSize = this.elements['foot-size'].value
+        const footWidth = this.elements['foot-width'].value
+        const footHeight = this.elements['foot-height'].value
+        const fit = this.elements['fit'].value
+        const standard = this.elements['size-standard'].value
+         data = {
+           inputLength:  footSize,
+            width: footWidth,
+            height: footHeight,
+            fitType: fit,
+            standard
+        }
+        console.log(data)
+    })
 
         let maxIndex = tabs.length
         tabCount.children[1].innerText = maxIndex
@@ -442,17 +463,30 @@ input[type=range]::-ms-thumb {
        
         let index= 0;
 
-        nextBtn.addEventListener('click', function(e){
+        nextBtn.addEventListener('click',async function(e){
 
            e.preventDefault();
            if(index === maxIndex -2){
                this.innerText = 'show result'
+
+             
            }
            if(index > maxIndex - 2){
-              document.querySelector('.tab-container').classList.add('hidden')
+              
+                //making a request
+                fetch('/wp-json/getsize/v1/calculate', { method: 'POST', headers: {"Content-type": 'application/json'},body: data}).then(res =>{
+                   accordBtn.querySelector('span:first-child').innerText = 'Your recommended fit is'
+                   accordBtn.querySelector('span:nth-child(2)').innerHTML = `<span>${res.recommendedLength}</span><span>${res.eliteFit}</span><span>${res.performanceFit}</span>`
+                   accordBtn.querySelector('span:nth-child(2)').classList.remove('hidden')
+                   accordBtn.querySelector('span:nth-child(3)').classList.add('hidden')
+                   endTab.querySelector('.content >div:nth-child(2) span:first-child').innerText = `${res.recommendedLength}`
+                   endTab.querySelector('.content >div:nth-child(2) span:last-child').innerText = `${res.eliteFit}`
+                   endTab.querySelector('.content >div:nth-child(3) span:first-child').innerText = `${res.recommendedLength}`
+                   endTab.querySelector('.content >div:nth-child(3) span:last-child').innerText = `${res.performanceFit}`
+                })
+                document.querySelector('.tab-container').classList.add('hidden')
               document.querySelector('.navigation').classList.add('hidden')
               document.querySelector('.end-tab').classList.remove('hidden')
-              
            }else{
             index++
          
@@ -503,8 +537,7 @@ input[type=range]::-ms-thumb {
 }
     
       //handling form values
-      const form = document.querySelector('.size-calculator-form')
-
+     
 
       // foot size slider handler
       const footSize = document.querySelector('#foot-size')
@@ -581,8 +614,7 @@ input[type=range]::-ms-thumb {
              
      })
 
-     const accordBtn = document.querySelector('.accord-btn')
-     const accord = document.querySelector('.accord')
+    
      
      
      gotItbtn.addEventListener('click', function(e){
@@ -603,22 +635,8 @@ input[type=range]::-ms-thumb {
             
        })
 
-    // making a api call
-
-    form.addEventListener('change', function(){
-        const footSize = this.elements['foot-size'].value
-        const footWidth = this.elements['foot-width'].value
-        const footHeight = this.elements['foot-height'].value
-        const fit = this.elements['fit'].value
-        let data = {
-            footSize,
-            footWidth,
-            footHeight,
-            fit,
-        }
-        console.log(data)
-    })
-
+   
+  
 
     </script>
 </body>

@@ -168,3 +168,12 @@ a{
 .multi-step .accord-btn {
     @apply cursor-pointer;
 }
+.multi-step .accord-btn span:nth-child(2) {
+    @apply text-blue-400;
+}
+.multi-step .accord-btn > span:nth-child(2) > span{
+    @apply  px-2;
+}
+.multi-step .accord-btn > span:nth-child(2) > span:nth-child(2){
+    @apply  border-blue-400 border-r-2 border-l-2;
+}
