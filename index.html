@@ -430,20 +430,28 @@ input[type=range]::-ms-thumb {
    
    
     <script>
-         const esValues=  ['7 YTH', '8 YTH', '9 YTH', '10 YTH', '11 YTH', '11.5 YTH', '12 YTH', '13 YTH', '13.5 YTH','1', '1.5', '2', '2.5' , '3', '3.5', '4', '4.5', '5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5' , '12', '13']
-        const euValues = ['24', '24', '26', '27', '27.5', '28', '28.5', '29', '30', '30.5', '31.5', '32.5', '33', '33.5', '34', '35', '35', '36', '37', '38', '40', '40', '41', '41', '42', '42', '43', '44', '44', '45','45', '46', '47', ]
-         const form = document.querySelector('.size-calculator-form')
+         const esValues=  ['10.5 YTH', '11 YTH', '11.5 YTH', '12 YTH', '12.5 YTH', '13 YTH', '13.5 YTH', '1 YTH', '1.5 YTH','2 YTH', '2.5 YTH', '3 YTH', '3.5 YTH' , '4 YTH', '4.5 YTH', '5 YTH', '5.5 YTH', '6 YTH', '6',  '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5' , '12', '13', '14', '15', '16']
+        const euValues = ['27', '27.5', '28', '28.5', '29', '30', '30.5', '31.5', '32.5', '33', '33.5', '34', '35', '35' , '36', '37','37', '37', '40', '40', '41', '41', '42', '42', '43', '43' , '44', '44', '45', '45', '46', '47','48', '49', '50']
+        const form = document.querySelector('.size-calculator-form')
          const accordBtn = document.querySelector('.accord-btn')
          const accord = document.querySelector('.accord')
          const endTab = document.querySelector('.end-tab')
-              
-     const findAgainbtn = document.querySelector('#again')
-     const gotItbtn = document.querySelector('#got-it')
+         const footSize = document.querySelector('#foot-size')
+        const footSizeSlider = form.elements['foot-size-slider']
+        const findAgainbtn = document.querySelector('#again')
+        const gotItbtn = document.querySelector('#got-it')
 
         const nextBtn = document.querySelector('#next')
         const prevBtn = document.querySelector('#prev')
         const tabs = document.querySelectorAll('.tab')
         const tabCount = document.querySelector('.tab-count')
+        const sizeStandard = form.elements['size-standard']
+
+
+        let footSizeValues = esValues
+        footSizeSlider.max = footSizeValues.length  - 1
+        footSizeSlider.value = 0
+        footSize.value =footSizeValues[footSizeSlider.value]
          // making a api call
          
          let data =  {
@@ -451,23 +459,33 @@ input[type=range]::-ms-thumb {
             width:form.elements['foot-width'].value,
             height: form.elements['foot-height'].value,
             fitType: form.elements['fit'].value,
-            
+            standard : form.elements['size-standard'].value,
+            index: form.elements['foot-size-slider'].value,
+            yth: true,
         };
-       
+     
        form.addEventListener('change', function(){
          
-         
-        
-        this.elements['fit'].value
-      
          data = {
            inputLength:  this.elements['foot-size'].value,
             width:this.elements['foot-width'].value,
             height: this.elements['foot-height'].value,
             fitType: this.elements['fit'].value,
-            
+            standard : this.elements['size-standard'].value,
+            index: form.elements['foot-size-slider'].value,
+            yth: true
         }
         
+        if(data.standard === 'EU'){
+          data.inputLength = esValues[data.index]
+          
+        }
+        if(data.inputLength.includes('YTH')){
+          data.yth = true
+        }else{
+          data.yth = false
+        }
+     
     })
 
         let maxIndex = tabs.length
@@ -513,25 +531,52 @@ input[type=range]::-ms-thumb {
 		}
 	}
 		
- function get_recommended_length(inputFit , inputLength) {
-       
+ function get_recommended_length(inputFit , inputLength, yth) {
+  let rLength;
 		// Calculate Reccomended Length based on "inputFit" and "inputLength"
 		switch (inputFit) {
 		  case 0:
 			// Subtract 0.5
-			return inputLength - 0.5;
+      
+      if(yth){
+        return (inputLength - 0.5) +'YTH'
+        
+      }else{
+         return inputLength - 0.5;
+      
+      }
+		
 			break;
 		  case 1:
 			// Do nothing
-			return inputLength;
+      if(yth){
+         return  inputLength +'YTH'
+        
+      }else{
+        return inputLength;
+      }
+		
 			break;
 		  case 2:
 			// Add 0.5
-			return inputLength + 0.5;
+     
+      if(yth){
+        return (inputLength + 0.5) +'YTH'
+         
+      }else{
+        return inputLength + 0.5;
+       
+      }
+			
 			break;
 		  default:
 			// Do nothing
-			return inputLength;
+      if(yth){
+        return inputLength +'YTH'
+      }else{
+        return inputLength;
+      }
+		
 		 }
 	}
 	
@@ -606,10 +651,12 @@ input[type=range]::-ms-thumb {
        const inputFit  = parseInt(data.fitType);
        const inputLength  = parseInt(data.inputLength);
        const width = parseInt(data.width);
-       const height=parseInt(data.height)
+       const height=parseInt(data.height);
+       const yth = data.yth
+       
        return {
           selectedFit : get_selected_type(inputFit),
-          recommendedLength : get_recommended_length(inputFit, inputLength),
+          recommendedLength : get_recommended_length(inputFit, inputLength, yth),
           performanceFit : get_performance_fit(width, height),
           eliteFit : get_elite_fit(width, height)
        }
@@ -687,15 +734,6 @@ input[type=range]::-ms-thumb {
      
 
       // foot size slider handler
-      const footSize = document.querySelector('#foot-size')
-      const footSizeSlider = form.elements['foot-size-slider']
-      const sizeStandard = form.elements['size-standard']
-     
-      let footSizeValues = esValues
-      footSizeSlider.max = footSizeValues.length  - 1
-      footSizeSlider.value = 0
-      footSize.value =footSizeValues[footSizeSlider.value]
-
       sizeStandard.forEach(item =>{
           item.addEventListener('input', function(){
               if(this.value === 'EU'){
